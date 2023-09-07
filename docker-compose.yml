@@ -1,0 +1,21 @@
+version: "3.7"
+
+
+
+services:
+  rabbitMq:
+    image: "rabbitmq:3-management-alpine"
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - ./docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ./docker-conf/rabbitmq/log/:/var/log/rabbitmq
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      SA_PASSWORD: "SqlServer2019!"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+    ports:
+      - "1433:1433"
